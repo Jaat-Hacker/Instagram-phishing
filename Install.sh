@@ -20,10 +20,6 @@ figlet "Insta Phisher" | lolcat
 echo -e "${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}"
 echo -e "Created by: Jaat-Hacker\n"
 
-# Clone repo
-echo -e "${GRN}[*] Cloning repository...${NC}"
-git clone https://github.com/YOUR_USERNAME/instagram-phishing-tool.git
-cd instagram-phishing-tool || { echo -e "${RED}Failed to enter folder!${NC}"; exit 1; }
 
 # Install dependencies
 echo -e "${GRN}[*] Installing requirements...${NC}"
