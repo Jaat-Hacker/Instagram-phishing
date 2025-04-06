@@ -13,7 +13,8 @@ pkg install figlet -y > /dev/null 2>&1
 pkg install ruby -y > /dev/null 2>&1
 gem install lolcat > /dev/null 2>&1
 figlet "Insta Phisher" | lolcat
-echo -e "${NC}"
+echo -e "${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}"
+echo -e "Created by: SACHIN BADASRA\n"
 
 echo -e "${GRN}[+] Installing requirements...${NC}"
 pkg update -y > /dev/null 2>&1
