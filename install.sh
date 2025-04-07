@@ -6,21 +6,32 @@ GRN='\033[1;32m'
 CYAN='\033[1;36m'
 NC='\033[0m'
 
-# Clear screen and show fancy banner
+# Clear screen
 clear
 
-# Install required packages if not installed
-command -v figlet >/dev/null 2>&1 || pkg install figlet -y > /dev/null 2>&1
-command -v toilet >/dev/null 2>&1 || pkg install toilet -y > /dev/null 2>&1
-command -v ruby >/dev/null 2>&1 || pkg install ruby -y > /dev/null 2>&1
-command -v lolcat >/dev/null 2>&1 || gem install lolcat > /dev/null 2>&1
+# Colors
+RED='\033[1;31m'
+GRN='\033[1;32m'
+CYAN='\033[1;36m'
+NC='\033[0m'
 
-echo -e "\n"
-toilet -f big 'Insta' | lolcat
-sleep 0.5
-toilet -f big 'Phisher' | lolcat
-echo -e "\n${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}" | lolcat
-echo -e "${CYAN}Created by: SACHIN BADASRA${NC}\n" | lolcat
+# Typing animation function
+type_writer() {
+    text=$1
+    color=$2
+    for ((i=0; i<${#text}; i++)); do
+        echo -ne "${color}${text:$i:1}${NC}"
+        sleep 0.07
+    done
+    echo ""
+}
+
+# Fancy animated title
+echo -ne "\n"
+type_writer "InstaPhisher" "${CYAN}"
+sleep 0.3
+echo -e "${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}"
+type_writer "Created by: SACHIN BADASRA" "${CYAN}"
 sleep 1
 
 # Colors
