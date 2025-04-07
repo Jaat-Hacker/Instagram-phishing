@@ -2,6 +2,9 @@
 
 This tool creates a fake Instagram login page for ethical hacking practice.
 
+## Created by 
+    SACHIN BADASRA
+
 ## Features
 - Realistic Instagram design
 - Captures username and password
