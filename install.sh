@@ -35,10 +35,8 @@ echo ""
 figlet -f slant "InstaPhisher" | lolcat -a -d 4
 
 # Animated subtitle
-echo -ne "\n"
-type_effect "\n${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}" 
-type_effect "${CYAN}Created by: SACHIN BADASRA${NC}\n"
-echo ""
+echo -e "${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}" 
+echo -e "${CYAN}Created by: SACHIN BADASRA\n"
 sleep 1
 
 # Colors
