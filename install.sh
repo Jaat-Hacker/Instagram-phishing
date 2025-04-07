@@ -10,28 +10,35 @@ NC='\033[0m'
 clear
 
 # Colors
-RED='\033[1;31m'
-GRN='\033[1;32m'
-CYAN='\033[1;36m'
 NC='\033[0m'
+GRADIENT=( '\033[1;31m' '\033[1;33m' '\033[1;32m' '\033[1;36m' '\033[1;34m' '\033[1;35m' )
+
+# Install figlet and lolcat silently
+pkg install figlet -y > /dev/null 2>&1
+pkg install toilet -y > /dev/null 2>&1
+pkg install ruby -y > /dev/null 2>&1
+gem install lolcat > /dev/null 2>&1
 
 # Typing animation function
-type_writer() {
-    text=$1
-    color=$2
-    for ((i=0; i<${#text}; i++)); do
-        echo -ne "${color}${text:$i:1}${NC}"
-        sleep 0.07
-    done
-    echo ""
+type_effect() {
+  text=$1
+  delay=${2:-0.07}
+  for ((i=0; i<${#text}; i++)); do
+    printf "%s" "${text:$i:1}"
+    sleep "$delay"
+  done
+  echo ""
 }
 
-# Fancy animated title
+# Print "InstaPhisher" big, one-line, animated
+echo ""
+figlet -f slant "InstaPhisher" | lolcat -a -d 4
+
+# Animated subtitle
 echo -ne "\n"
-type_writer "InstaPhisher" "${CYAN}"
-sleep 0.3
-echo -e "${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}"
-type_writer "Created by: SACHIN BADASRA" "${CYAN}"
+type_effect "Instagram Phishing Tool for Ethical Hacking Practice" 0.03
+type_effect "Created by: SACHIN BADASRA" 0.03
+echo ""
 sleep 1
 
 # Colors
