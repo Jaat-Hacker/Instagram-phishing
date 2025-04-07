@@ -58,7 +58,6 @@ rainbow_type() {
 rainbow_type "Instagram Phishing Tool for Ethical Hacking Practice" 0.03
 rainbow_type "Created by: SACHIN BADASRA" 0.04
 echo ""
-}
 
 # Colors
 GRN='\033[0;32m'
