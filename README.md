@@ -8,8 +8,8 @@ This tool creates a fake Instagram login page for ethical hacking practice.
 - Redirects to official Instagram login page
 
 ## port forwarding 
-• Servio.net
-• Localhost 
+- Serveo.net
+- Localhost 
 
 
 ## Usage
