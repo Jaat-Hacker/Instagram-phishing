@@ -6,15 +6,22 @@ GRN='\033[1;32m'
 CYAN='\033[1;36m'
 NC='\033[0m'
 
-# Clear and banner
+# Clear screen and show fancy banner
 clear
-echo -e "${CYAN}"
-pkg install figlet -y > /dev/null 2>&1
-pkg install ruby -y > /dev/null 2>&1
-gem install lolcat > /dev/null 2>&1
-figlet "Insta Phisher" | lolcat
-echo -e "${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}"
-echo -e "Created by: SACHIN BADASRA\n"
+
+# Install required packages if not installed
+command -v figlet >/dev/null 2>&1 || pkg install figlet -y > /dev/null 2>&1
+command -v toilet >/dev/null 2>&1 || pkg install toilet -y > /dev/null 2>&1
+command -v ruby >/dev/null 2>&1 || pkg install ruby -y > /dev/null 2>&1
+command -v lolcat >/dev/null 2>&1 || gem install lolcat > /dev/null 2>&1
+
+echo -e "\n"
+toilet -f big 'Insta' | lolcat
+sleep 0.5
+toilet -f big 'Phisher' | lolcat
+echo -e "\n${GRN}Instagram Phishing Tool for Ethical Hacking Practice${NC}" | lolcat
+echo -e "${CYAN}Created by: SACHIN BADASRA${NC}\n" | lolcat
+sleep 1
 
 # Colors
 GRN='\033[0;32m'
