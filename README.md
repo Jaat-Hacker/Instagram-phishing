@@ -9,7 +9,7 @@ This tool creates a fake Instagram login page for ethical hacking practice.
 
 ## Tool Preview
 
-![Preview](screenshots/tool-preview.png)
+![Preview](screenshots.png)
 
 ## port forwarding 
 - Serveo.net
