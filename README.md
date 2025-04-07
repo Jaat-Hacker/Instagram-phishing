@@ -7,7 +7,8 @@ This tool creates a fake Instagram login page for ethical hacking practice.
 - Captures username and password
 - Redirects to official Instagram login page
 
-
+## Tool Screenshot 
+![Instagram Phishing Tool](screenshot.png)
 
 
 ## port forwarding 
