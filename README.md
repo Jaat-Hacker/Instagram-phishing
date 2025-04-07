@@ -13,7 +13,11 @@ SACHIN BADASRA
 ## Tool Screenshot 
 ![Instagram Phishing Tool](screenshot.png)
 
-
+## How to use:
+     git clone https://github.com/Jaat-Hacker/Instagram-phishing.git
+     cd Instagram-phishing 
+     chmod +x *
+     bash install.sh
 ## port forwarding 
 - Serveo.net
 - Localhost 
