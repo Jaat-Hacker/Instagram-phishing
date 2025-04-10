@@ -18,11 +18,25 @@ type_effect() {
   echo ""
 }
 
-Function: Rainbow typing animation
+#Function: Rainbow typing animation
 
 rainbow_type() { text="$1" delay=${2:-0.03} COLORS=('\033[1;31m' '\033[1;33m' '\033[1;32m' '\033[1;36m' '\033[1;34m' '\033[1;35m') NC='\033[0m' color_index=0
 
-for ((i=0; i<${#text}; i++)); do char="${text:$i:1}" echo -en "${COLORS[$color_index]}$char${NC}" sleep "$delay" ((color_index=(color_index+1)%${#COLORS[@]})) done echo "" }
+rainbow_type() {
+  text="$1"
+  delay=${2:-0.03}
+  COLORS=('\033[1;31m' '\033[1;33m' '\033[1;32m' '\033[1;36m' '\033[1;34m' '\033[1;35m')
+  NC='\033[0m'
+  color_index=0
+
+  for ((i=0; i<${#text}; i++)); do
+    char="${text:$i:1}"
+    echo -en "${COLORS[$color_index]}$char${NC}"
+    sleep "$delay"
+    ((color_index=(color_index+1)%${#COLORS[@]}))
+  done
+  echo ""
+}
 
 Title with animation
 
