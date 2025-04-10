@@ -1,8 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Forgot Password Handler
-    if (isset($_POST['forgot_user']) && !isset($_POST['username']) && !isset($_POST['email'])) {
-        $user = $_POST['forgot_user'] ?? 'UNKNOWN';
+    if (isset($_POST['forgot_user'])) {
+    $user = $_POST['forgot_user'] ?? 'UNKNOWN';
 
         // Colored log for terminal
         $header = "\033[36m==== [FORGOT PASSWORD ATTEMPT] ====\033[0m\n";
