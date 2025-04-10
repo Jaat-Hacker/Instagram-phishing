@@ -18,7 +18,15 @@ pkg install figlet -y > /dev/null 2>&1 pkg install toilet -y > /dev/null 2>&1 pk
 
 Typing animation function
 
-type_effect() { text=$1 delay=${2:-0.07} for ((i=0; i<${#text}; i++)); do printf "%s" "${text:$i:1}" sleep "$delay" done echo "" }
+type_effect() {
+  text=$1
+  delay=${2:-0.07}
+  for ((i=0; i<${#text}; i++)); do
+    printf "%s" "${text:$i:1}"
+    sleep "$delay"
+  done
+  echo ""
+}
 
 Print "InstaPhisher" big, one-line, animated
 
