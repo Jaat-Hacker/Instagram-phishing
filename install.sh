@@ -67,14 +67,20 @@ Main Menu
 echo -e "${CYAN}Choose Port Forwarding Method:${NC}" echo "1) Localhost (same device)" echo "2) Serveo.net (public)" echo "3) Cloudflared (public)" read -p $'\n>> ' choice
 
 case $choice in
-
-1. start_localhost;;
-
-
-2. start_serveo;;
-
-
-3. start_cloudflared;; *) echo -e "${RED}[!] Invalid choice.${NC}"; exit 1;; esac
+  1)
+    start_localhost
+    ;;
+  2)
+    start_serveo
+    ;;
+  3)
+    start_cloudflared
+    ;;
+  *)
+    echo -e "${RED}[!] Invalid choice.${NC}"
+    exit 1
+    ;;
+esac
 
 
 
