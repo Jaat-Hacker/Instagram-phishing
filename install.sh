@@ -1,5 +1,18 @@
 #!/bin/bash
 
+# Auto-install missing dependencies (figlet, lolcat)
+if ! command -v figlet > /dev/null 2>&1; then
+    echo "[*] Installing figlet..."
+    pkg install figlet -y
+fi
+
+if ! command -v lolcat > /dev/null 2>&1; then
+    echo "[*] Installing lolcat..."
+    pkg install ruby -y
+    gem install lolcat
+fi
+
+
 # Colors
 RED='\033[1;31m'
 GRN='\033[1;32m'
