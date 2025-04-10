@@ -6,9 +6,17 @@ RED='\033[1;31m' GRN='\033[1;32m' CYAN='\033[1;36m' YEL='\033[1;33m' NC='\033[0m
 
 clear
 
-Function: Typing animation
+#Function: Typing animation
 
-type_effect() { text="$1" delay=${2:-0.07} for ((i=0; i<${#text}; i++)); do printf "%s" "${text:$i:1}" sleep "$delay" done echo "" }
+type_effect() {
+  text="$1"
+  delay=${2:-0.07}
+  for ((i=0; i<${#text}; i++)); do
+    printf "%s" "${text:$i:1}"
+    sleep "$delay"
+  done
+  echo ""
+}
 
 Function: Rainbow typing animation
 
