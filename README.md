@@ -31,5 +31,10 @@ php -S 127.0.0.1:8080
 
 Then open [http://127.0.0.1:8080](http://127.0.0.1:8080)
 
+## Tested on 
+- Termux
+- kali-linux
+
+
 ## Legal Warning
 This tool is for educational purposes **only**. Do not use it on real users.
