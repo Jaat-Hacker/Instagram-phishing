@@ -62,6 +62,32 @@ if [ ! -f "$HOME/.mytool_installed" ]; then
   pkg install php openssh git figlet toilet ruby -y > /dev/null 2>&1
   gem install lolcat > /dev/null 2>&1
   touch "$HOME/.mytool_installed"
+  echo "[*] Checking for cloudflared..."
+
+# Check if cloudflared already exists
+if [ ! -f cloudflared ]; then
+    echo "[+] Downloading cloudflared..."
+
+    # Detect architecture
+    ARCH=$(uname -m)
+    if [[ "$ARCH" == "aarch64" || "$ARCH" == "armv7l" || "$ARCH" == "arm" ]]; then
+        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm -O cloudflared
+    else
+        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
+    fi
+
+    chmod +x cloudflared
+
+    if [ -f cloudflared ]; then
+        echo "[+] cloudflared installed successfully!"
+    else
+        echo "[!] Failed to install cloudflared."
+        exit 1
+    fi
+else
+    echo "[*] cloudflared already exists. Skipping download."
+fi
+
   echo -e "${GRN}[+] Setup complete.${NC}"
 else
   echo -e "${GRN}[*] Requirements already installed.${NC}"
