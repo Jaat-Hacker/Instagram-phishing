@@ -62,30 +62,38 @@ if [ ! -f "$HOME/.mytool_installed" ]; then
   pkg install php openssh git figlet toilet ruby -y > /dev/null 2>&1
   gem install lolcat > /dev/null 2>&1
   touch "$HOME/.mytool_installed"
-  echo "[*] Checking for cloudflared..."
 
-# Check if cloudflared already exists
-if [ ! -f cloudflared ]; then
-    echo "[+] Downloading cloudflared..."
+  echo "[*] Setting up cloudflared..."
 
-    # Detect architecture
-    ARCH=$(uname -m)
-    if [[ "$ARCH" == "aarch64" || "$ARCH" == "armv7l" || "$ARCH" == "arm" ]]; then
-        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm -O cloudflared
-    else
-        wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -O cloudflared
-    fi
+# Remove any old version
+rm -f cloudflared
 
-    chmod +x cloudflared
-
-    if [ -f cloudflared ]; then
-        echo "[+] cloudflared installed successfully!"
-    else
-        echo "[!] Failed to install cloudflared."
-        exit 1
-    fi
+# Detect architecture
+ARCH=$(uname -m)
+if [[ "$ARCH" == "aarch64" || "$ARCH" == "armv7l" || "$ARCH" == "arm" ]]; then
+    URL="https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm"
 else
-    echo "[*] cloudflared already exists. Skipping download."
+    URL="https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64"
+fi
+
+# Download cloudflared
+wget -q --show-progress "$URL" -O cloudflared
+
+# Check if download succeeded
+if [ ! -f cloudflared ]; then
+    echo "[!] Failed to download cloudflared."
+    exit 1
+fi
+
+# Make it executable
+chmod +x cloudflared
+
+# Test execution
+if ./cloudflared --version > /dev/null 2>&1; then
+    echo "[+] cloudflared installed and ready!"
+else
+    echo "[!] cloudflared download corrupted or incompatible."
+    exit 1
 fi
 
   echo -e "${GRN}[+] Setup complete.${NC}"
