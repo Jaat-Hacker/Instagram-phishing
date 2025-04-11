@@ -9,6 +9,8 @@ SACHIN BADASRA
 - Realistic Instagram design
 - Captures username and password
 - Redirects to official Instagram login page
+- Attached facebook phishing page and forget password page in Instagram phishing page 
+ 
 
 ## Tool Screenshot 
 ![Instagram Phishing Tool](screenshot.png)
