@@ -13,6 +13,10 @@ SACHIN BADASRA
 ## Tool Screenshot 
 ![Instagram Phishing Tool](screenshot.png)
 
+## Demo
+
+![Demo GIF](demo_converted.gif)
+
 ## How to use:
      git clone https://github.com/Jaat-Hacker/Instagram-phishing.git
      cd Instagram-phishing 
