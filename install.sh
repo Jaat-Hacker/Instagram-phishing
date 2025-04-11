@@ -121,7 +121,7 @@ start_cloudflared() {
     tail -n 10 cloudflared.log
   fi
 }
-}
+
 
 # Main Menu
 echo -e "${CYAN}Choose Port Forwarding Method:${NC}"
