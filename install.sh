@@ -98,7 +98,7 @@ if [ ! -z "$SERVEO_URL" ]; then
 else
   echo -e "${RED}[!] Failed to get Serveo URL. Check your connection.${NC}"
 fi
-}
+
 # Main Menu
 echo -e "${CYAN}Choose Port Forwarding Method:${NC}"
 echo "1) Localhost (same device)"
